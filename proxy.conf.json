@@ -1,0 +1,7 @@
+{
+    "/484828400013957/*": {
+        "target": "https://superheroapi.com/api",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

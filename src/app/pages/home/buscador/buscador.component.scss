@@ -1,0 +1,38 @@
+.bg-header-modal {
+    background-color: rgb(251, 84, 43);
+}
+
+.text-orange {
+    color: rgb(251, 84, 43);
+}
+
+.bg-footer-modal {
+    background-color: #292961;
+}
+
+.list-hero {
+    padding: 0;
+
+    li {
+        text-decoration: none;
+        list-style: none;
+        text-align: center;
+
+        i {
+            font-size: 20px;
+        }
+
+        span {
+            font-size: 10px;
+            font-weight: bold;
+        }
+    }
+}
+
+.border-none {
+    border: none;
+}
+
+.bg-categoria {
+    background-color: #d2f4ea;
+}

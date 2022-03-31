@@ -1,0 +1,108 @@
+<div class="text-end">
+  <button class="btn btn-sm btn-primary" data-bs-target="#staticBackdrop" data-bs-toggle="modal"
+    (click)="openModal()">Agregar héroe
+  </button>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white py-1 bg-header-modal">
+        <h5 class="modal-title" id="staticBackdropLabel">Añadir héroes</h5>
+        <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Cuentas en tu equipo con {{sumAlignment.good}} héroes buenos y {{sumAlignment.bad}} héroes malvados</p>
+        <div>
+          <form [formGroup]="form" class="row g-2" (submit)="buscar()">
+            <div class="input-group mb-1">
+              <input type="text" class="form-control form-control-sm" formControlName="query"
+                placeholder="Escribe el nombre del héroe..." aria-label="Recipient's username"
+                aria-describedby="button-addon2">
+              <button class="btn btn-sm btn-outline-secondary" type="button" (click)="buscar()"
+                id="button-addon2">Buscar</button>
+            </div>
+            <div class="mt-0" *ngIf="isFieldInvalid('query')" style="display: block;">
+              <small class="text-danger">*Introduce un nombre de héroe o villano en tu búsqueda</small>
+            </div>
+          </form>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 pt-4">
+          <div class="col" *ngFor="let personaje of dataPages; let i = index">
+            <div class="card">
+              <img [src]=personaje.image.url class="card-img-top" alt="...">
+              <div class="accordion" id="accordion">
+                <div class="accordion-item border-none">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button p-2 bg-categoria" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      <small>PowerStarts</small>
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                    data-bs-parent="#accordion">
+                    <div class="accordion-body px-0 py-1">
+                      <h6 class="card-title text-orange m-0 pt-1 text-center">{{personaje.name}}</h6>
+                      <ul class="list-hero row row-cols-3 m-0">
+                        <li class="col">
+                          <i class="bi bi-heart-arrow"></i>
+                          <span class="text-muted"> {{personaje.powerstats.combat}}</span>
+                        </li>
+                        <li class="col">
+                          <i class="bi bi-heart-pulse"></i>
+                          <span class="text-muted"> {{personaje.powerstats.durability}}</span>
+                        </li>
+                        <li class="col">
+                          <i class="bi bi-eyeglasses"></i>
+                          <span class="text-muted"> {{personaje.powerstats.intelligence}}</span>
+                        </li>
+                        <li class="col">
+                          <i class="bi bi-lightning"></i>
+                          <span class="text-muted"> {{personaje.powerstats.power}}</span>
+                        </li>
+                        <li class="col">
+                          <i class="bi bi-speedometer"></i>
+                          <span class="text-muted"> {{personaje.powerstats.speed}}</span>
+                        </li>
+                        <li class="col">
+                          <i class="bi bi-radioactive"></i>
+                          <span class="text-muted"> {{personaje.powerstats.strength}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="p-0">
+                      <button class="btn btn-sm bg-header-modal text-center text-white" (click)="agregar(personaje.id)"
+                        style="width: 100%;">Agregar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="mt-4" aria-label="Page navigation example" *ngIf="pages.length > 0">
+          <ul class="pagination pagination-sm justify-content-center">
+            <li class="page-item {{(active == 1)? 'disabled': ''}}">
+              <a class="page-link" aria-label="Previous" (click)="getDataByPage(active-1)">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item {{(page == active)? 'active': ''}}" *ngFor="let page of pages">
+              <button class="page-link" (click)="getDataByPage(page)">{{page}}</button>
+            </li>
+            <li class="page-item {{(active == pages.length)? 'disabled': ''}}">
+              <a class="page-link" aria-label="Next" (click)="getDataByPage(active+1)">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="modal-footer m-0">
+      </div>
+    </div>
+  </div>
+</div>

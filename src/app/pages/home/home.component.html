@@ -1,0 +1,46 @@
+<div class="container pt-4 m-footer">
+  <div class="flex">
+    <div>
+      <h4 *ngIf="categoriaEquipo">Categoría Equipo: <span class="bg-categoria px-3">{{categoriaEquipo |
+          uppercase}}</span></h4>
+      <ul class="row list-unstyled list mb-0">
+        <li *ngFor="let item of items" class="col mb-4 p-0" data-tags="file file type extension"
+          data-categories="files and folders">
+          <a class="btn d-block text-dark text-decoration-none hv-blue">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+              <i class="{{item.icon}}" style="font-size: 30px;" fill="currentColor"></i>
+            </div>
+            <small class="name text-muted text-decoration-none text-center pt-1">{{item.label}}:
+              {{item.property}}</small>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <app-buscador (eventAdd)="eventAdd($event)" [sumAlignment]="sumAlignment"></app-buscador>
+      <!--BUSCADOR DE SUPERHÉROES-->
+    </div>
+  </div>
+  <div class="row row-cols-3 row-cols-md-5 row-cols-lg-6 g-4 mt-4">
+    <div class="col" *ngFor="let personaje of equipoPersonajes; let i = index">
+      <div class="card">
+        <img [src]=personaje.image.url class="card-img-top" alt="...">
+        <div class="card-body py-1">
+          <h6 class="card-title bg-categoria px-1">{{personaje.name}}</h6>
+          <ul class="list-unstyled">
+            <li>Combate {{personaje.powerstats.combat}}</li>
+            <li>Duración {{personaje.powerstats.durability}}</li>
+            <li>Inteligencia {{personaje.powerstats.intelligence}}</li>
+            <li>Poder {{personaje.powerstats.power}}</li>
+            <li>Rapidéz {{personaje.powerstats.speed}}</li>
+            <li>Fuerza {{personaje.powerstats.strength}}</li>
+          </ul>
+          <div class="per-flex-row-evenly">
+            <button class="btn btn-sm btn-primary" [routerLink]="['/hero', personaje.id]">Detalle</button>
+            <button class="btn btn-sm btn-danger" (click)="delete(i)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
