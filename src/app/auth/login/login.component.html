@@ -1,0 +1,29 @@
+<div class="bg-light">
+    <div class="container height-all">
+        <div class="row form-pos">
+            <form [formGroup]="form" class="col-4 offset-4 p-4 rounded bg-white">
+                <h5 class="text-primary mb-4">Bienvenido a SuperHero Challenge</h5>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control form-control-sm" formControlName="email"
+                        id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Ingresa tu correo electrónico">
+                    <div *ngIf="isFieldInvalid('email')">
+                        <small class="text-danger">*El correo electrónico es requerido para iniciar</small>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control form-control-sm" formControlName="password"
+                        id="exampleInputPassword1" placeholder="Ingresa tu contraseña">
+                    <div *ngIf="isFieldInvalid('password')">
+                        <small class="text-danger">*El ingreso de la contraseña es requerida para iniciar</small>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-sm btn-primary" (click)="onSubmit()">Iniciar sesión</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
